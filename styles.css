@@ -1090,3 +1090,31 @@ a { text-decoration: none; }
 }
 
 .footer-text .highlight { color: var(--blue); }
+
+
+/* ============================================================
+   10. INLINE CODE (used in project bullets)
+   ============================================================ */
+code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: var(--border);
+  color: var(--cyan);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+/* ============================================================
+   11. STRONG HIGHLIGHTS IN BULLETS
+   ============================================================ */
+.exp-bullets strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ============================================================
+   12. CONTACT GRID — expand to handle 6 cards
+   ============================================================ */
+.contact-grid {
+  grid-template-columns: 1fr 1fr;
+}

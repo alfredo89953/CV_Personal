@@ -55,6 +55,7 @@ detailed and beautiful. Return ONLY the SVG element starting <svg and ending
     certs:      'certificaciones',
     education:  'educación',
     contact:    'contacto',
+    projects:   'proyectos',
   },
 
   /** Delay (ms) before starting sidebar bars animation on load */
