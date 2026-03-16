@@ -1118,3 +1118,21 @@ code {
 .contact-grid {
   grid-template-columns: 1fr 1fr;
 }
+
+
+/* ============================================================
+   13. HERO LINKS (GitHub / LinkedIn)
+   ============================================================ */
+.hero-link {
+  color: var(--text-soft);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  border-bottom: 1px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast);
+}
+
+.hero-link:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
