@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Alfredo Pablo García — Software Engineer</title>
+  <meta name="description" content="Alfredo Pablo García — Ingeniero en Desarrollo y Gestión de Software. Backend, infraestructura de redes y ciberseguridad.">
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Inter — tipografía corporativa única, sin acentos futuristas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- ① Design layer — all visual rules live here -->
   <link rel="stylesheet" href="styles.css">
@@ -18,13 +19,31 @@
 <div class="app">
 
   <!-- ══════════════════════════════════════════════
+       MOBILE TOPBAR — visible only on small viewports
+       ══════════════════════════════════════════════ -->
+  <header class="mobile-topbar" role="banner">
+    <div class="mobile-topbar-id">
+      <span class="mobile-topbar-name">Alfredo P. García</span>
+      <span class="mobile-topbar-role">Software Engineer</span>
+    </div>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="sidebar">
+      <span class="mobile-menu-icon">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </header>
+
+  <!-- Backdrop shown behind the sidebar when it opens as an overlay on mobile -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ══════════════════════════════════════════════
        SIDEBAR
        ══════════════════════════════════════════════ -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
 
     <!-- Avatar + name block -->
     <div class="sb-hero">
-      <div class="avatar-ring">
+      <div class="avatar-frame">
         <div class="avatar-inner" id="avatar-container">
           <!-- Real photo — AvatarLoader will replace with Ghibli SVG
                if CONFIG.avatar.useRealPhoto is set to false in app.js -->
@@ -35,74 +54,59 @@
         </div>
       </div>
       <div class="sb-name">Alfredo P. García</div>
-      <div class="sb-role">software.engineer()</div>
+      <div class="sb-role">Software Engineer</div>
       <div class="sb-status">
         <span class="status-dot"></span>
-        disponible · MX
+        Disponible · México
       </div>
     </div>
 
     <!-- Navigation -->
     <nav class="sb-nav" aria-label="Secciones del CV">
-      <div class="sb-nav-label">// navegación</div>
-      <a href="#hero"       class="sb-nav-link is-active"><span class="nav-icon">⌂</span> Inicio</a>
-      <a href="#profile"    class="sb-nav-link"><span class="nav-icon">◉</span> Perfil</a>
-      <a href="#experience" class="sb-nav-link"><span class="nav-icon">◈</span> Experiencia <span class="nav-count">5</span></a>
-      <a href="#skills"     class="sb-nav-link"><span class="nav-icon">◇</span> Habilidades</a>
-      <a href="#certs"      class="sb-nav-link"><span class="nav-icon">◆</span> Certificaciones <span class="nav-count">2</span></a>
-      <a href="#education"  class="sb-nav-link"><span class="nav-icon">◑</span> Educación</a>
-      <a href="#contact"    class="sb-nav-link"><span class="nav-icon">◎</span> Contacto</a>
-      <a href="#projects"   class="sb-nav-link"><span class="nav-icon">◈</span> Proyectos <span class="nav-count">1</span></a>
+      <span class="sb-nav-label">Navegación</span>
+      <a href="#hero"       class="sb-nav-link is-active">Inicio</a>
+      <a href="#profile"    class="sb-nav-link">Perfil</a>
+      <a href="#experience" class="sb-nav-link">Experiencia <span class="nav-count">5</span></a>
+      <a href="#skills"     class="sb-nav-link">Competencias</a>
+      <a href="#certs"      class="sb-nav-link">Certificaciones <span class="nav-count">3</span></a>
+      <a href="#education"  class="sb-nav-link">Educación</a>
+      <a href="#contact"    class="sb-nav-link">Contacto</a>
+      <a href="#projects"   class="sb-nav-link">Proyectos <span class="nav-count">1</span></a>
     </nav>
 
-    <!-- Quick-view tech stack bars -->
+    <!-- Tech stack — etiquetas sutiles agrupadas por categoría de negocio -->
     <div class="sb-skills">
-      <div class="sb-skills-label">// tech_stack</div>
+      <span class="sb-skills-label">Áreas de especialización</span>
 
-      <div class="sb-skill">
-        <div class="sb-skill-row">
-          <span class="sb-skill-name">Node.js</span>
-          <span class="sb-skill-pct">88%</span>
+      <div class="sb-skill-group">
+        <span class="sb-skill-group-title">Backend</span>
+        <div class="sb-tag-list">
+          <span class="sb-tag">Node.js</span>
+          <span class="sb-tag">JavaScript</span>
+          <span class="sb-tag">Java</span>
         </div>
-        <div class="sb-bar"><div class="sb-bar-fill" data-w="88"></div></div>
       </div>
 
-      <div class="sb-skill">
-        <div class="sb-skill-row">
-          <span class="sb-skill-name">JavaScript</span>
-          <span class="sb-skill-pct">82%</span>
+      <div class="sb-skill-group">
+        <span class="sb-skill-group-title">Cloud</span>
+        <div class="sb-tag-list">
+          <span class="sb-tag">AWS</span>
+          <span class="sb-tag">Git / GitHub</span>
         </div>
-        <div class="sb-bar"><div class="sb-bar-fill" data-w="82"></div></div>
       </div>
 
-      <div class="sb-skill">
-        <div class="sb-skill-row">
-          <span class="sb-skill-name">Git / GitHub</span>
-          <span class="sb-skill-pct">85%</span>
+      <div class="sb-skill-group">
+        <span class="sb-skill-group-title">Infraestructura</span>
+        <div class="sb-tag-list">
+          <span class="sb-tag">Fortinet</span>
+          <span class="sb-tag">Redes</span>
         </div>
-        <div class="sb-bar"><div class="sb-bar-fill" data-w="85"></div></div>
-      </div>
-
-      <div class="sb-skill">
-        <div class="sb-skill-row">
-          <span class="sb-skill-name">Fortinet</span>
-          <span class="sb-skill-pct">78%</span>
-        </div>
-        <div class="sb-bar"><div class="sb-bar-fill" data-w="78"></div></div>
-      </div>
-
-      <div class="sb-skill">
-        <div class="sb-skill-row">
-          <span class="sb-skill-name">Java</span>
-          <span class="sb-skill-pct">72%</span>
-        </div>
-        <div class="sb-bar"><div class="sb-bar-fill" data-w="72"></div></div>
       </div>
     </div>
 
     <footer class="sb-footer">
-      <div>© 2025 <span class="highlight">alfredo.garcia</span></div>
-      <div>build <span class="highlight">v3.0.0</span> · Mérida, MX</div>
+      <div>© 2026 Alfredo Pablo García</div>
+      <div>Mérida, Yucatán · México</div>
     </footer>
 
   </aside><!-- /sidebar -->
@@ -113,20 +117,17 @@
        ══════════════════════════════════════════════ -->
   <div class="main-wrap">
 
-    <!-- Sticky topbar with breadcrumb -->
+    <!-- Sticky topbar with breadcrumb (desktop only) -->
     <header class="topbar" role="banner">
       <div class="topbar-breadcrumb">
-        <span>~/portfolio</span>
+        <span>Currículum Vitae</span>
         <span class="bc-sep">/</span>
-        <span>curriculum-vitae</span>
-        <span class="bc-sep">/</span>
-        <span class="bc-current" id="bc-current">inicio</span>
+        <span class="bc-current" id="bc-current">Inicio</span>
       </div>
       <div class="topbar-tags">
-        <span class="tb-tag tb-tag--blue">Node.js</span>
-        <span class="tb-tag tb-tag--amber">Fortinet NSE</span>
+        <span class="tb-tag tb-tag--accent">AWS Certified</span>
+        <span class="tb-tag">Fortinet NSE</span>
         <span class="tb-tag">Full Stack</span>
-        <span class="tb-tag">Open to work</span>
       </div>
     </header>
 
@@ -134,46 +135,47 @@
     <!-- ─── HERO ──────────────────────────────── -->
     <section id="hero" aria-label="Presentación">
       <p class="hero-eyebrow">Software Engineer</p>
-      <h1 class="hero-name">
-        Alfredo<br>
-        <span class="name-accent">Pablo García</span>
-      </h1>
+      <h1 class="hero-name">Alfredo Pablo García</h1>
       <p class="hero-tagline">
-        Ingeniero en Desarrollo y Gestión de Software con <strong>más de 3 años de experiencia</strong>
-        en soporte TI, desarrollo backend y administración de infraestructura de redes.
-        Certificado en ciberseguridad por <strong>Fortinet</strong> y <strong>Google</strong>.
+        Ingeniero en Desarrollo y Gestión de Software con <strong>más de 4 años de experiencia</strong>
+        en desarrollo backend, infraestructura de redes y ciberseguridad. Certificado en
+        <strong>AWS</strong>, <strong>Fortinet</strong> y <strong>Google Cybersecurity</strong>.
         Orientado a resultados con impacto medible.
       </p>
 
-      <div class="chips" role="list" aria-label="Tecnologías">
+      <div class="hero-actions">
+        <a href="assets/Alfredo-Pablo-Garcia-CV.pdf" class="btn-download" download aria-label="Descargar CV en formato PDF">
+          <svg class="btn-download-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 1.5V10.5M8 10.5L4.5 7M8 10.5L11.5 7M2 13.5H14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Descargar CV
+        </a>
+        <a href="#contact" class="btn-secondary">Contactar</a>
+      </div>
+
+      <div class="chips" role="list" aria-label="Tecnologías principales">
         <span class="chip chip--highlight" role="listitem">Node.js</span>
-        <span class="chip chip--highlight" role="listitem">JavaScript ES6+</span>
+        <span class="chip chip--highlight" role="listitem">AWS Cloud Practitioner</span>
         <span class="chip chip--highlight" role="listitem">REST APIs</span>
         <span class="chip" role="listitem">Java</span>
         <span class="chip" role="listitem">Git / GitHub</span>
         <span class="chip" role="listitem">Fortinet NSE</span>
-        <span class="chip" role="listitem">Network Security</span>
-        <span class="chip" role="listitem">CCTV IP</span>
-        <span class="chip" role="listitem">LAN / WAN</span>
+        <span class="chip" role="listitem">Seguridad de redes</span>
         <span class="chip" role="listitem">SQL · MySQL</span>
         <span class="chip" role="listitem">Linux CLI</span>
-        <span class="chip" role="listitem">PMBOK</span>
-        <span class="chip" role="listitem">Scrum / Agile</span>
-        <span class="chip" role="listitem">HTML5 · CSS3</span>
+        <span class="chip" role="listitem">PMBOK · Scrum</span>
       </div>
 
       <div class="hero-meta">
-        <div class="hero-meta-item"><span class="meta-dot">▸</span> Mérida, Yucatán · México</div>
-        <div class="hero-meta-item"><span class="meta-dot">▸</span> Fundación Rafael Dondé</div>
-        <div class="hero-meta-item"><span class="meta-dot">▸</span> Disponible inmediatamente</div>
+        <div class="hero-meta-item">Mérida, Yucatán · México</div>
+        <div class="hero-meta-item">Fundación Rafael Dondé</div>
+        <div class="hero-meta-item">Disponible inmediatamente</div>
         <div class="hero-meta-item">
-          <span class="meta-dot">▸</span>
           <a href="https://github.com/alfredo89953" target="_blank" rel="noopener noreferrer" class="hero-link">
             github.com/alfredo89953
           </a>
         </div>
         <div class="hero-meta-item">
-          <span class="meta-dot">▸</span>
           <a href="https://linkedin.com/in/alfredo-pablo-garcia-494075293" target="_blank" rel="noopener noreferrer" class="hero-link">
             linkedin.com/in/alfredo-pablo-garcia-494075293
           </a>
@@ -183,22 +185,22 @@
 
 
     <!-- ─── STATS ─────────────────────────────── -->
-    <div class="stats-bar reveal" role="region" aria-label="Resumen estadístico">
+    <div class="stats-bar reveal" role="region" aria-label="Resumen de impacto profesional">
       <div class="stat-cell">
-        <div class="stat-number">4<span class="stat-unit">+</span></div>
-        <div class="stat-label">años_exp</div>
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Años de experiencia</div>
       </div>
       <div class="stat-cell">
         <div class="stat-number">5</div>
-        <div class="stat-label">empresas</div>
+        <div class="stat-label">Empresas</div>
       </div>
       <div class="stat-cell">
-        <div class="stat-number">2</div>
-        <div class="stat-label">certs_activas</div>
+        <div class="stat-number">3</div>
+        <div class="stat-label">Certificaciones activas</div>
       </div>
       <div class="stat-cell">
         <div class="stat-number">4</div>
-        <div class="stat-label">ciudades</div>
+        <div class="stat-label">Ciudades</div>
       </div>
     </div>
 
@@ -206,47 +208,41 @@
     <!-- ─── MAIN SCROLLABLE CONTENT ─────────────── -->
     <main class="content">
 
-      <!-- 01 · PROFILE -->
+      <!-- 01 · PROFILE — texto plano, semántica ATS-friendly -->
       <section id="profile" class="reveal" aria-label="Perfil profesional">
         <div class="section-heading">
-          <span class="section-num">01</span>
-          <h2 class="section-title">Perfil</h2>
+          <h2 class="section-title">Perfil profesional</h2>
           <div class="section-line"></div>
         </div>
 
-        <div class="terminal" role="region" aria-label="Perfil en formato código">
-          <div class="terminal-titlebar">
-            <div class="terminal-dot terminal-dot--red"></div>
-            <div class="terminal-dot terminal-dot--yellow"></div>
-            <div class="terminal-dot terminal-dot--green"></div>
-            <span class="terminal-filename">alfredo.config.ts</span>
-          </div>
-          <div class="terminal-body">
-            <span class="t-line"><span class="t-comment">// perfil profesional · ATS-optimized · 2025</span></span>
-            <span class="t-line"><span class="t-keyword">const</span> <span class="t-value">engineer</span> = {</span>
-            <span class="t-line">  <span class="t-keyword">nombre</span>:       <span class="t-string">"Alfredo Pablo García"</span>,</span>
-            <span class="t-line">  <span class="t-keyword">rol</span>:          <span class="t-string">"Full Stack Engineer · IT Infrastructure · Cybersecurity"</span>,</span>
-            <span class="t-line">  <span class="t-keyword">experiencia</span>:  <span class="t-value">"+3 años"</span>,</span>
-            <span class="t-line">  <span class="t-keyword">ubicacion</span>:    <span class="t-string">"Mérida, Yucatán, México"</span>,</span>
-            <span class="t-line">  <span class="t-keyword">stack</span>: [</span>
-            <span class="t-line">    <span class="t-string">"Node.js"</span>, <span class="t-string">"JavaScript ES6+"</span>, <span class="t-string">"Java"</span>, <span class="t-string">"REST APIs"</span>,</span>
-            <span class="t-line">    <span class="t-string">"HTML5/CSS3"</span>, <span class="t-string">"SQL/MySQL"</span>, <span class="t-string">"Git"</span>, <span class="t-string">"Linux CLI"</span>,</span>
-            <span class="t-line">  ],</span>
-            <span class="t-line">  <span class="t-keyword">seguridad</span>: [<span class="t-string">"Fortinet NSE"</span>, <span class="t-string">"Firewall"</span>, <span class="t-string">"VPN"</span>, <span class="t-string">"CCTV IP"</span>, <span class="t-string">"LAN/WAN"</span>],</span>
-            <span class="t-line">  <span class="t-keyword">gestion</span>:    [<span class="t-string">"PMBOK"</span>, <span class="t-string">"Scrum"</span>, <span class="t-string">"Agile"</span>, <span class="t-string">"Documentación TI"</span>],</span>
-            <span class="t-line">  <span class="t-keyword">certs</span>:      [<span class="t-string">"Fortinet Certified Associate NSE"</span>, <span class="t-string">"Google Cybersecurity"</span>],</span>
-            <span class="t-line">  <span class="t-keyword">impacto</span>: {</span>
-            <span class="t-line">    <span class="t-keyword">procesos_automatizados</span>: <span class="t-value">3</span>,</span>
-            <span class="t-line">    <span class="t-keyword">sistemas_cctv</span>:         <span class="t-value">20</span>,</span>
-            <span class="t-line">    <span class="t-keyword">uptime_logrado</span>:        <span class="t-string">"99%"</span>,</span>
-            <span class="t-line">    <span class="t-keyword">reduccion_incidencias</span>: <span class="t-string">"-75% TTR"</span>,</span>
-            <span class="t-line">  },</span>
-            <span class="t-line">  <span class="t-keyword">disponible</span>: <span class="t-value">true</span>,</span>
-            <span class="t-line">};</span>
-            <span class="t-line">&nbsp;</span>
-            <span class="t-line"><span class="t-prompt">$</span> <span class="t-plain">node engineer.js --hire --location=merida --open-to=remote</span></span>
-            <span class="t-line"><span class="t-output">→ ✓ Listo para nuevos desafíos · Resultados comprobables</span></span>
-          </div>
+        <div class="profile-text">
+          <p>
+            Ingeniero en Desarrollo y Gestión de Software con más de cuatro años de experiencia
+            combinando desarrollo backend, administración de infraestructura de redes y
+            ciberseguridad. Mi trabajo se centra en construir sistemas confiables y en proteger
+            la infraestructura crítica de las organizaciones donde colaboro.
+          </p>
+          <p>
+            He desarrollado e implementado soluciones con <strong>Node.js</strong> y
+            <strong>Java</strong> que automatizan procesos internos y reducen tiempos de
+            procesamiento manual, además de administrar infraestructura de red con
+            <strong>Fortinet</strong>, logrando hasta un <strong>99% de disponibilidad</strong>
+            en servicios críticos. Cuento con certificaciones en <strong>AWS Cloud
+            Practitioner</strong>, <strong>Fortinet Certified Associate in Cybersecurity</strong>
+            y <strong>Google Cybersecurity</strong>.
+          </p>
+          <p>
+            A lo largo de mi trayectoria he reducido tiempos de resolución de incidencias hasta
+            en un 75%, instalado y configurado más de diez sistemas de videovigilancia IP para
+            clientes corporativos, y colaborado en hojas de ruta tecnológicas institucionales,
+            alineando las decisiones de TI con los objetivos estratégicos del negocio.
+          </p>
+          <ul class="profile-list">
+            <li>Desarrollo backend con Node.js, Java y APIs REST</li>
+            <li>Administración de infraestructura de redes y seguridad perimetral (Fortinet)</li>
+            <li>Gestión de proyectos con metodologías PMBOK y Scrum/Agile</li>
+            <li>Documentación técnica y soporte de TI nivel 1 y 2</li>
+          </ul>
         </div>
       </section>
 
@@ -254,8 +250,7 @@
       <!-- 02 · EXPERIENCE -->
       <section id="experience" aria-label="Experiencia profesional">
         <div class="section-heading">
-          <span class="section-num">02</span>
-          <h2 class="section-title">Experiencia</h2>
+          <h2 class="section-title">Experiencia profesional</h2>
           <div class="section-line"></div>
         </div>
 
@@ -265,12 +260,12 @@
           <article class="exp-card reveal">
             <div class="exp-card-top">
               <h3 class="exp-role">Soporte &amp; Desarrollo TI</h3>
-              <span class="exp-badge exp-badge--current">● actual</span>
+              <span class="exp-badge exp-badge--current">Puesto actual</span>
             </div>
             <div class="exp-company">Fundación Rafael Dondé</div>
             <div class="exp-meta-row">
-              <span class="exp-meta-item">📅 sept. 2025 – actualidad · 7 meses</span>
-              <span class="exp-meta-item">📍 Mérida, Yucatán · Presencial</span>
+              <span class="exp-meta-item">Septiembre 2025 – Actualidad · 7 meses</span>
+              <span class="exp-meta-item">Mérida, Yucatán · Presencial</span>
             </div>
             <div class="exp-tech-row">
               <span class="tech-tag">Node.js</span>
@@ -290,12 +285,12 @@
           <article class="exp-card reveal">
             <div class="exp-card-top">
               <h3 class="exp-role">Ingeniero de Soporte TI</h3>
-              <span class="exp-badge exp-badge--past">ene – ago 2025</span>
+              <span class="exp-badge exp-badge--past">Ene – Ago 2025</span>
             </div>
-            <div class="exp-company">MG SISTEMAS</div>
+            <div class="exp-company">MG Sistemas</div>
             <div class="exp-meta-row">
-              <span class="exp-meta-item">📅 8 meses</span>
-              <span class="exp-meta-item">📍 Tuxtla Gutiérrez, Chiapas · Presencial</span>
+              <span class="exp-meta-item">8 meses</span>
+              <span class="exp-meta-item">Tuxtla Gutiérrez, Chiapas · Presencial</span>
             </div>
             <div class="exp-tech-row">
               <span class="tech-tag">CCTV IP</span>
@@ -313,12 +308,12 @@
           <article class="exp-card reveal">
             <div class="exp-card-top">
               <h3 class="exp-role">Desarrollador de Software</h3>
-              <span class="exp-badge exp-badge--remote">remoto</span>
+              <span class="exp-badge exp-badge--remote">Remoto</span>
             </div>
             <div class="exp-company">Cluster Integradores de Alta Tecnología</div>
             <div class="exp-meta-row">
-              <span class="exp-meta-item">📅 ene – sept. 2024 · 9 meses</span>
-              <span class="exp-meta-item">📍 Guadalajara, Jalisco · Remoto</span>
+              <span class="exp-meta-item">Enero – Septiembre 2024 · 9 meses</span>
+              <span class="exp-meta-item">Guadalajara, Jalisco · Remoto</span>
             </div>
             <div class="exp-tech-row">
               <span class="tech-tag">Java</span>
@@ -337,12 +332,12 @@
           <article class="exp-card reveal">
             <div class="exp-card-top">
               <h3 class="exp-role">Ingeniero de Soporte</h3>
-              <span class="exp-badge exp-badge--past">ene – sept. 2024</span>
+              <span class="exp-badge exp-badge--past">Ene – Sept 2024</span>
             </div>
             <div class="exp-company">JRL Sistemas</div>
             <div class="exp-meta-row">
-              <span class="exp-meta-item">📅 9 meses</span>
-              <span class="exp-meta-item">📍 Guadalajara, Jalisco · Presencial</span>
+              <span class="exp-meta-item">9 meses</span>
+              <span class="exp-meta-item">Guadalajara, Jalisco · Presencial</span>
             </div>
             <div class="exp-tech-row">
               <span class="tech-tag">CCTV IP</span>
@@ -360,12 +355,12 @@
           <article class="exp-card exp-card--faded reveal">
             <div class="exp-card-top">
               <h3 class="exp-role">Soporte de Software</h3>
-              <span class="exp-badge exp-badge--past">may – ago. 2022</span>
+              <span class="exp-badge exp-badge--past">May – Ago 2022</span>
             </div>
             <div class="exp-company">Centro Ecoturístico Selvaje</div>
             <div class="exp-meta-row">
-              <span class="exp-meta-item">📅 4 meses</span>
-              <span class="exp-meta-item">📍 Chiapas · Presencial</span>
+              <span class="exp-meta-item">4 meses</span>
+              <span class="exp-meta-item">Chiapas · Presencial</span>
             </div>
             <div class="exp-tech-row">
               <span class="tech-tag">Soporte</span>
@@ -381,85 +376,52 @@
       </section>
 
 
-      <!-- 03 · SKILLS -->
-      <section id="skills" class="reveal" aria-label="Habilidades técnicas">
+      <!-- 03 · SKILLS — etiquetas sutiles agrupadas, sin barras de progreso -->
+      <section id="skills" class="reveal" aria-label="Competencias técnicas">
         <div class="section-heading">
-          <span class="section-num">03</span>
-          <h2 class="section-title">Habilidades</h2>
+          <h2 class="section-title">Competencias técnicas</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="skills-grid">
 
           <div class="skill-group reveal">
-            <div class="skill-group-title">⚡ Desarrollo</div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Node.js</span><span class="skill-level">avanzado</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="88"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-level">avanzado</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="82"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Java</span><span class="skill-level">intermedio</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="72"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">HTML / CSS</span><span class="skill-level">avanzado</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="80"></div></div>
+            <h3 class="skill-group-title">Desarrollo</h3>
+            <div class="skill-tag-list">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">HTML / CSS</span>
+              <span class="skill-tag">REST APIs</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <div class="skill-group-title">🔒 Seguridad &amp; Redes</div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Fortinet</span><span class="skill-level">certificado</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--amber" data-w="78"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Ciberseguridad</span><span class="skill-level">certificado</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--amber" data-w="74"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">CCTV IP</span><span class="skill-level">avanzado</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--amber" data-w="83"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Infraestructura TI</span><span class="skill-level">intermedio</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--amber" data-w="76"></div></div>
+            <h3 class="skill-group-title">Cloud &amp; Seguridad</h3>
+            <div class="skill-tag-list">
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Fortinet</span>
+              <span class="skill-tag">Ciberseguridad</span>
+              <span class="skill-tag">CCTV IP</span>
+              <span class="skill-tag">Infraestructura TI</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <div class="skill-group-title">🗄️ Datos &amp; DevOps</div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Git / GitHub</span><span class="skill-level">avanzado</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--green" data-w="85"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">SQL / MySQL</span><span class="skill-level">intermedio</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--green" data-w="70"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Linux CLI</span><span class="skill-level">intermedio</span></div>
-              <div class="bar-track"><div class="bar-fill bar-fill--green" data-w="68"></div></div>
+            <h3 class="skill-group-title">Datos &amp; Herramientas</h3>
+            <div class="skill-tag-list">
+              <span class="skill-tag">Git / GitHub</span>
+              <span class="skill-tag">SQL / MySQL</span>
+              <span class="skill-tag">Linux CLI</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <div class="skill-group-title">📋 Gestión</div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">PMBOK</span><span class="skill-level">fundamentos</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="65"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Scrum / Ágil</span><span class="skill-level">básico</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="60"></div></div>
-            </div>
-            <div class="skill-row">
-              <div class="skill-info"><span class="skill-name">Documentación</span><span class="skill-level">intermedio</span></div>
-              <div class="bar-track"><div class="bar-fill" data-w="75"></div></div>
+            <h3 class="skill-group-title">Gestión</h3>
+            <div class="skill-tag-list">
+              <span class="skill-tag">PMBOK</span>
+              <span class="skill-tag">Scrum / Ágil</span>
+              <span class="skill-tag">Documentación técnica</span>
             </div>
           </div>
 
@@ -467,26 +429,48 @@
       </section>
 
 
-      <!-- 04 · CERTS -->
+      <!-- 04 · CERTS — incluye AWS Certified Cloud Practitioner -->
       <section id="certs" class="reveal" aria-label="Certificaciones">
         <div class="section-heading">
-          <span class="section-num">04</span>
           <h2 class="section-title">Certificaciones</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="cert-grid">
-          <div class="cert-card reveal">
-            <div class="cert-issuer-badge">🛡 Fortinet</div>
-            <div class="cert-name">Fortinet Certified Associate<br>in Cybersecurity</div>
-            <div class="cert-id">ID: 6255365932AP</div>
-            <div class="cert-validity">nov. 2025 – nov. 2027 · Activa</div>
+          <div class="cert-card cert-card--featured reveal">
+            <div class="cert-issuer-badge">AWS</div>
+            <h3 class="cert-name">AWS Certified Cloud Practitioner</h3>
+            <div class="cert-validity">Vigente · 20 jun. 2026 – 20 jun. 2029</div>
+            <a class="cert-link" href="https://www.credly.com/badges/b1971ad4-9858-4399-a0ba-e08363200843/public_url" target="_blank" rel="noopener noreferrer">
+              Ver credencial
+              <svg class="cert-link-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 3.5H3.5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V10M9.5 2.5H13.5V6.5M13 3L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
           <div class="cert-card reveal">
-            <div class="cert-issuer-badge">◎ Google</div>
-            <div class="cert-name">Google Cybersecurity<br>Certificate</div>
+            <div class="cert-issuer-badge">Fortinet</div>
+            <h3 class="cert-name">Fortinet Certified Associate in Cybersecurity</h3>
+            <div class="cert-id">ID: 6255365932AP</div>
+            <div class="cert-validity">Vigente · Nov. 2025 – Nov. 2027</div>
+            <a class="cert-link" href="https://www.credly.com/badges/0c5bdce4-554a-4d72-a9d1-5c273b40cd03/public_url" target="_blank" rel="noopener noreferrer">
+              Ver credencial
+              <svg class="cert-link-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 3.5H3.5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V10M9.5 2.5H13.5V6.5M13 3L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+          <div class="cert-card reveal">
+            <div class="cert-issuer-badge">Google</div>
+            <h3 class="cert-name">Google Cybersecurity Certificate</h3>
             <div class="cert-id">ID: HHWF9PVUNRTC</div>
-            <div class="cert-validity">2024 · Completada</div>
+            <div class="cert-validity">Completada · 2024</div>
+            <a class="cert-link" href="https://www.coursera.org/account/accomplishments/professional-cert/certificate/HHWF9PVUNRTC" target="_blank" rel="noopener noreferrer">
+              Ver credencial
+              <svg class="cert-link-icon" width="11" height="11" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 3.5H3.5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V10M9.5 2.5H13.5V6.5M13 3L7 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -495,17 +479,15 @@
       <!-- 05 · EDUCATION -->
       <section id="education" class="reveal" aria-label="Educación">
         <div class="section-heading">
-          <span class="section-num">05</span>
           <h2 class="section-title">Educación</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="edu-card reveal">
-          <div class="edu-icon-box">🎓</div>
           <div>
-            <div class="edu-degree">Ingeniería en Desarrollo y Gestión de Software</div>
+            <h3 class="edu-degree">Ingeniería en Desarrollo y Gestión de Software</h3>
             <div class="edu-school">Universidad Tecnológica de la Selva</div>
-            <div class="edu-period">sept. 2020 – mayo 2024</div>
+            <div class="edu-period">Septiembre 2020 – Mayo 2024</div>
             <div class="edu-tags">
               <span class="tech-tag">Git</span>
               <span class="tech-tag">SQL</span>
@@ -521,52 +503,49 @@
       <!-- 06 · CONTACT -->
       <section id="contact" class="reveal" aria-label="Contacto">
         <div class="section-heading">
-          <span class="section-num">06</span>
           <h2 class="section-title">Contacto</h2>
           <div class="section-line"></div>
         </div>
 
         <div class="contact-grid">
           <div class="contact-card">
-            <div class="contact-icon">📍</div>
             <div>
-              <div class="contact-label">ubicación</div>
+              <div class="contact-label">Ubicación</div>
               <div class="contact-value">Mérida, Yucatán · México</div>
             </div>
           </div>
           <div class="contact-card">
-            <div class="contact-icon">💼</div>
             <div>
-              <div class="contact-label">empresa actual</div>
+              <div class="contact-label">Empresa actual</div>
               <div class="contact-value">Fundación Rafael Dondé</div>
             </div>
           </div>
           <div class="contact-card">
-            <div class="contact-icon">🟢</div>
             <div>
-              <div class="contact-label">disponibilidad</div>
-              <div class="contact-value">Inmediata · Open to offers</div>
+              <div class="contact-label">Disponibilidad</div>
+              <div class="contact-value">Inmediata · Abierto a propuestas</div>
             </div>
           </div>
           <div class="contact-card">
-            <div class="contact-icon">🗣</div>
             <div>
-              <div class="contact-label">idiomas</div>
+              <div class="contact-label">Idiomas</div>
               <div class="contact-value">Español (nativo) · Inglés B1</div>
             </div>
           </div>
           <div class="contact-card">
-            <div class="contact-icon">🔗</div>
             <div>
               <div class="contact-label">LinkedIn</div>
-              <div class="contact-value">linkedin.com/in/alfredo-pablo-garcia-494075293</div>
+              <div class="contact-value">
+                <a class="contact-link" href="https://linkedin.com/in/alfredo-pablo-garcia-494075293" target="_blank" rel="noopener noreferrer">linkedin.com/in/alfredo-pablo-garcia-494075293</a>
+              </div>
             </div>
           </div>
           <div class="contact-card">
-            <div class="contact-icon">🐙</div>
             <div>
               <div class="contact-label">GitHub</div>
-              <div class="contact-value">github.com/alfredo89953</div>
+              <div class="contact-value">
+                <a class="contact-link" href="https://github.com/alfredo89953" target="_blank" rel="noopener noreferrer">github.com/alfredo89953</a>
+              </div>
             </div>
           </div>
         </div>
@@ -577,7 +556,6 @@
       <!-- 07 · PROJECTS -->
       <section id="projects" class="reveal" aria-label="Proyectos destacados">
         <div class="section-heading">
-          <span class="section-num">07</span>
           <h2 class="section-title">Proyectos</h2>
           <div class="section-line"></div>
         </div>
@@ -585,14 +563,13 @@
         <article class="exp-card reveal">
           <div class="exp-card-top">
             <h3 class="exp-role">CV Portfolio Interactivo</h3>
-            <span class="exp-badge exp-badge--current">live</span>
+            <span class="exp-badge exp-badge--current">En línea</span>
           </div>
           <div class="exp-company">Proyecto personal · Open Source</div>
           <div class="exp-meta-row">
-            <span class="exp-meta-item">📅 2025</span>
-            <span class="exp-meta-item">🔗 github.com/alfredo89953/CV_Personal</span>
+            <span class="exp-meta-item">2025 – 2026</span>
+            <span class="exp-meta-item">github.com/alfredo89953/CV_Personal</span>
           </div>
-          <!-- Stack tecnológico utilizado en el proyecto -->
           <div class="exp-tech-row">
             <span class="tech-tag">HTML5</span>
             <span class="tech-tag">CSS3</span>
@@ -600,17 +577,11 @@
             <span class="tech-tag">IntersectionObserver</span>
             <span class="tech-tag">Zero dependencias</span>
           </div>
-
-          <!--
           <ul class="exp-bullets">
-            
-            <li>Diseñé y desarrollé un CV interactivo tipo aplicación web con arquitectura separada en 3 capas (<code>index.html</code> · <code>styles.css</code> · <code>app.js</code>) siguiendo principios de separación de responsabilidades.</li>
-           
-            <li>Implementé animaciones on-scroll con <strong>IntersectionObserver API</strong> nativa, dark mode completo con CSS custom properties y sidebar con scroll independiente — sin librerías externas.</li>
-            
-            <li>Estructuré el JS en <strong>6 clases ES6 independientes</strong> con un objeto CONFIG centralizado, haciendo el código mantenible y fácilmente extensible.</li>
+            <li>Diseñé y desarrollé un currículum interactivo tipo aplicación web con arquitectura separada en tres capas (HTML, CSS y JavaScript), siguiendo principios de separación de responsabilidades.</li>
+            <li>Implementé animaciones on-scroll con IntersectionObserver API nativa y un diseño completamente responsivo, sin librerías externas.</li>
+            <li>Estructuré el JavaScript en módulos independientes con un objeto de configuración centralizado, manteniendo el código mantenible y fácilmente extensible.</li>
           </ul>
-        -->
         </article>
 
       </section>
@@ -621,10 +592,10 @@
     <!-- Site footer (inside main-wrap so it respects sidebar offset) -->
     <footer class="site-footer" role="contentinfo">
       <div class="footer-text">
-        © 2025 <span class="highlight">Alfredo Pablo García</span> · Todos los derechos reservados
+        © 2026 Alfredo Pablo García · Todos los derechos reservados
       </div>
       <div class="footer-text">
-        build <span class="highlight">v3.1.0</span> · ATS-optimized · last_commit: <span class="highlight">2025-03-15</span>
+        Actualizado en junio de 2026
       </div>
     </footer>
 

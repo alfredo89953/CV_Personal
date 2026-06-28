@@ -7,12 +7,11 @@
  * Modules
  * -------
  * 1.  Config & data
- * 2.  SidebarSkillBars   — animate sidebar progress bars on load
- * 3.  SkillBarObserver   — animate main skill bars on scroll enter
- * 4.  RevealObserver     — fade-in sections as they enter viewport
- * 5.  ActiveNavObserver  — sync nav highlight + topbar breadcrumb
- * 6.  AvatarLoader       — call Claude API for Ghibli SVG (fallback: real photo)
- * 7.  Bootstrap          — wire everything up on DOMContentLoaded
+ * 2.  MobileNav          — toggles the off-canvas sidebar on small screens
+ * 3.  RevealObserver     — fade-in sections as they enter viewport
+ * 4.  ActiveNavObserver  — sync nav highlight + topbar breadcrumb
+ * 5.  AvatarLoader       — call Claude API for Ghibli SVG (fallback: real photo)
+ * 6.  Bootstrap          — wire everything up on DOMContentLoaded
  * ============================================================
  */
 
@@ -41,103 +40,79 @@ detailed and beautiful. Return ONLY the SVG element starting <svg and ending
 
   observers: {
     /** IntersectionObserver thresholds */
-    skillBars:   { threshold: 0.30 },
     reveal:      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
     activeNav:   { threshold: 0.40 },
   },
 
   /** Map section id → human-readable breadcrumb label */
   sectionLabels: {
-    hero:       'inicio',
-    profile:    'perfil',
-    experience: 'experiencia',
-    skills:     'habilidades',
-    certs:      'certificaciones',
-    education:  'educación',
-    contact:    'contacto',
-    projects:   'proyectos',
+    hero:       'Inicio',
+    profile:    'Perfil',
+    experience: 'Experiencia',
+    skills:     'Competencias',
+    certs:      'Certificaciones',
+    education:  'Educación',
+    contact:    'Contacto',
+    projects:   'Proyectos',
   },
 
-  /** Delay (ms) before starting sidebar bars animation on load */
-  sidebarBarDelay: 600,
-
-  /** Delay (ms) before skill bar fills when entering viewport */
-  skillBarDelay: 200,
+  /** Max viewport width (px) at which the sidebar behaves as an off-canvas menu */
+  mobileBreakpoint: 960,
 };
 
 
 /* ============================================================
-   2. SIDEBAR SKILL BARS
-   — Animate progress bars inside the sidebar on page load.
+   2. MOBILE NAV
+   — Toggles the off-canvas sidebar on small screens: opens on
+     hamburger tap, closes on backdrop tap, nav-link tap, or Esc.
    ============================================================ */
 
-class SidebarSkillBars {
-  constructor(selector = '.sb-bar-fill') {
-    this.elements = document.querySelectorAll(selector);
+class MobileNav {
+  constructor() {
+    this.sidebar   = document.getElementById('sidebar');
+    this.button    = document.getElementById('mobile-menu-btn');
+    this.backdrop  = document.getElementById('sidebar-backdrop');
+    this.navLinks  = document.querySelectorAll('.sb-nav-link');
   }
 
-  /** Kick off animation after a brief delay so the page has painted. */
   init() {
-    setTimeout(() => this._animate(), CONFIG.sidebarBarDelay);
-  }
+    if (!this.sidebar || !this.button || !this.backdrop) return;
 
-  _animate() {
-    this.elements.forEach(el => {
-      el.style.width = this._getTarget(el);
+    this.button.addEventListener('click', () => this._toggle());
+    this.backdrop.addEventListener('click', () => this._close());
+
+    this.navLinks.forEach(link => {
+      link.addEventListener('click', () => this._close());
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') this._close();
     });
   }
 
-  /** Read the desired width from the data-w attribute (e.g. "88" → "88%"). */
-  _getTarget(el) {
-    const raw = el.getAttribute('data-w');
-    return raw ? `${raw}%` : '0%';
+  _toggle() {
+    const isOpen = this.sidebar.classList.contains('is-open');
+    isOpen ? this._close() : this._open();
+  }
+
+  _open() {
+    this.sidebar.classList.add('is-open');
+    this.backdrop.classList.add('is-visible');
+    this.button.classList.add('is-active');
+    this.button.setAttribute('aria-expanded', 'true');
+  }
+
+  _close() {
+    this.sidebar.classList.remove('is-open');
+    this.backdrop.classList.remove('is-visible');
+    this.button.classList.remove('is-active');
+    this.button.setAttribute('aria-expanded', 'false');
   }
 }
 
 
 /* ============================================================
-   3. SKILL BAR OBSERVER
-   — Animate main-content skill bars when their parent card
-     scrolls into the viewport.
-   ============================================================ */
-
-class SkillBarObserver {
-  constructor(cardSelector = '.skill-group') {
-    this.cardSelector = cardSelector;
-    this.observer = null;
-  }
-
-  init() {
-    this.observer = new IntersectionObserver(
-      entries => this._onIntersect(entries),
-      CONFIG.observers.skillBars
-    );
-
-    document.querySelectorAll(this.cardSelector).forEach(card => {
-      this.observer.observe(card);
-    });
-  }
-
-  _onIntersect(entries) {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      /* Animate every [data-w] bar inside the entering card. */
-      entry.target.querySelectorAll('[data-w]').forEach(bar => {
-        setTimeout(() => {
-          bar.style.width = `${bar.getAttribute('data-w')}%`;
-        }, CONFIG.skillBarDelay);
-      });
-
-      /* Unobserve so the animation only fires once. */
-      this.observer.unobserve(entry.target);
-    });
-  }
-}
-
-
-/* ============================================================
-   4. REVEAL OBSERVER
+   3. REVEAL OBSERVER
    — Fade-in + slide-up elements with class `.reveal` as they
      enter the viewport.
    ============================================================ */
@@ -170,7 +145,7 @@ class RevealObserver {
 
 
 /* ============================================================
-   5. ACTIVE NAV OBSERVER
+   4. ACTIVE NAV OBSERVER
    — Keeps the sidebar navigation link and topbar breadcrumb
      in sync with the currently visible section.
    ============================================================ */
@@ -218,7 +193,7 @@ class ActiveNavObserver {
 
 
 /* ============================================================
-   6. AVATAR LOADER
+   5. AVATAR LOADER
    — If CONFIG.avatar.useRealPhoto is false, call the Claude
      API to generate a Ghibli-style SVG and inject it into the
      avatar slot.  Falls back silently on any error.
@@ -289,14 +264,13 @@ class AvatarLoader {
 
 
 /* ============================================================
-   7. BOOTSTRAP
+   6. BOOTSTRAP
    — Instantiate every module and call .init() once the DOM
      is fully parsed.
    ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  new SidebarSkillBars().init();
-  new SkillBarObserver().init();
+  new MobileNav().init();
   new RevealObserver().init();
   new ActiveNavObserver().init();
   new AvatarLoader().init();
