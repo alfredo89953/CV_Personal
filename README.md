@@ -1,22 +1,22 @@
-# 🧑‍💻 Alfredo Pablo García — CV Portfolio
+# Alfredo Pablo García — CV Portfolio
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-3.0.0-3B82F6?style=flat-square)
-![Status](https://img.shields.io/badge/status-active-10B981?style=flat-square)
-![License](https://img.shields.io/badge/license-MIT-F59E0B?style=flat-square)
-![HTML](https://img.shields.io/badge/HTML5-semantic-E34F26?style=flat-square&logo=html5&logoColor=white)
+![Version](https://img.shields.io/badge/version-4.0.0-C9A55C?style=flat-square)
+![Status](https://img.shields.io/badge/status-active-4D8C6F?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-5B6577?style=flat-square)
+![HTML](https://img.shields.io/badge/HTML5-semantic_ATS-E34F26?style=flat-square&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-custom_properties-1572B6?style=flat-square&logo=css3&logoColor=white)
 ![JS](https://img.shields.io/badge/JavaScript-ES6_classes-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 
 <br/>
 
 > **CV interactivo** construido como una aplicación web profesional —  
-> arquitectura limpia, dark mode, animaciones on-scroll y diseño tipo IDE.
+> diseño corporativo premium, dark mode, responsivo mobile-first y semántica ATS-friendly.
 
 <br/>
 
-[🌐 Ver en vivo](https://alfredo89953.github.io/CV_Personal) · [📄 Descargar PDF](#) · [📬 Contacto](#contacto)
+[🌐 Ver en vivo](https://alfredo89953.github.io/CV_Personal) · [📄 Descargar PDF](assets/Alfredo-Pablo-Garcia-CV.pdf) · [📬 Contacto](#-contacto)
 
 </div>
 
@@ -26,9 +26,12 @@
 
 ```
 CV_Personal/
-├── index.html       # Estructura semántica — cero lógica, cero estilos inline
-├── styles.css       # Capa de diseño — design tokens, componentes, animaciones
-└── app.js           # Capa de comportamiento — clases ES6, observers, config
+├── index.html                    # Estructura semántica ATS-friendly — cero lógica, cero estilos inline
+├── styles.css                    # Capa de diseño — design tokens, componentes, responsivo
+├── app.js                        # Capa de comportamiento — clases ES6, observers, config
+├── assets/
+│   └── Alfredo-Pablo-Garcia-CV.pdf   # PDF descargable (colocar aquí)
+└── README.md
 ```
 
 > **Separación estricta de responsabilidades.**  
@@ -41,39 +44,48 @@ CV_Personal/
 
 | Feature | Detalle |
 |---|---|
-| 🎨 **Dark mode** | Paleta completa con CSS custom properties |
-| 📐 **Layout tipo IDE** | Sidebar fija + topbar sticky + breadcrumb dinámico |
-| 🔄 **Animaciones on-scroll** | `IntersectionObserver` — sin librerías externas |
-| 📊 **Skill bars animadas** | Entran al viewport con transición CSS |
-| 🧭 **Nav activa** | Se sincroniza automáticamente con la sección visible |
-| 🖼️ **Avatar ring** | Borde conic-gradient giratorio con `@keyframes` |
-| 💻 **Terminal block** | Perfil renderizado como código con syntax highlighting |
-| 📱 **Scrollbar custom** | Diseñada para Webkit y Firefox |
-| ♿ **Accesible** | Roles ARIA, landmarks semánticos, `aria-label` |
-| 🚀 **Zero dependencias** | Vanilla HTML + CSS + JS — sin frameworks |
+| 🎨 **Dark mode corporativo** | Paleta azul casi negro con acento dorado sobrio — CSS custom properties |
+| 📐 **Layout sidebar + main** | Sidebar fija 292 px + topbar sticky + breadcrumb dinámico |
+| 📱 **Mobile-first responsivo** | Sidebar colapsa a menú off-canvas con botón hamburguesa en ≤ 960 px |
+| 🔄 **Animaciones on-scroll** | `IntersectionObserver` nativo — cero librerías externas |
+| 🏷️ **Skill tags agrupadas** | Competencias como etiquetas por categoría (Backend · Cloud · Infraestructura) |
+| 🧭 **Nav activa** | Se sincroniza automáticamente con la sección visible al hacer scroll |
+| 📋 **Semántica ATS-friendly** | `h1`/`h2`/`p`/`ul`/`li` reales — sin bloques de código decorativos |
+| 🎓 **Credenciales verificables** | Links directos a Credly y Coursera para cada certificación |
+| 📥 **CTA Descargar CV** | Botón de descarga como acción primaria en el hero |
+| ♿ **Accesible** | Roles ARIA, landmarks semánticos, `aria-label`, `aria-expanded` |
+| 🚀 **Zero dependencias** | Vanilla HTML + CSS + JS — sin frameworks ni bundlers |
 
 ---
 
 ## 🏗️ Arquitectura JS
 
 ```js
-// app.js — 6 módulos independientes
+// app.js — 5 módulos independientes
 
-class SidebarSkillBars   // Anima barras del sidebar al cargar
-class SkillBarObserver   // Anima barras del main al entrar al viewport
-class RevealObserver     // Fade-in + slide-up de secciones
-class ActiveNavObserver  // Sincroniza nav + breadcrumb con scroll
-class AvatarLoader       // Carga foto real o SVG Ghibli vía API
-// Bootstrap              // DOMContentLoaded → instancia y llama .init()
+class MobileNav          // Abre/cierra sidebar off-canvas en mobile (backdrop, Esc, nav-link)
+class RevealObserver     // Fade-in + slide-up de elementos .reveal al entrar al viewport
+class ActiveNavObserver  // Sincroniza nav lateral + breadcrumb con la sección visible
+class AvatarLoader       // Carga foto real o SVG Ghibli vía Claude API (configurable)
+// Bootstrap             // DOMContentLoaded → instancia todos los módulos y llama .init()
 ```
 
 Toda la configuración vive en un objeto centralizado:
 
 ```js
 const CONFIG = {
-  avatar:    { useRealPhoto: true, apiModel: '...', ... },
-  observers: { skillBars: { threshold: 0.30 }, ... },
-  sectionLabels: { hero: 'inicio', experience: 'experiencia', ... },
+  avatar: {
+    useRealPhoto: true,          // false → genera SVG Ghibli vía Claude API
+    apiModel: 'claude-sonnet-4-6',
+  },
+  observers: {
+    reveal:    { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
+    activeNav: { threshold: 0.40 },
+  },
+  sectionLabels: {
+    hero: 'Inicio', profile: 'Perfil', experience: 'Experiencia', ...
+  },
+  mobileBreakpoint: 960,         // px — por debajo activa el menú off-canvas
 };
 ```
 
@@ -82,21 +94,33 @@ const CONFIG = {
 ## 🎨 Design Tokens
 
 ```css
-/* styles.css — todas las decisiones de diseño en un solo lugar */
+/* styles.css — todas las decisiones visuales en un solo lugar */
 :root {
-  --bg:           #0A0E17;   /* fondo principal          */
-  --blue:         #3B82F6;   /* color de acento          */
-  --cyan:         #22D3EE;   /* highlights               */
-  --amber:        #F59E0B;   /* badges / warnings        */
-  --green:        #10B981;   /* estados activos / éxito  */
-  --font-mono:    'JetBrains Mono', monospace;
-  --font-display: 'Syne', sans-serif;
-  --sidebar-w:    280px;
+  /* Fondos — azul casi negro, sofisticado */
+  --bg:        #050810;
+  --surface:   #0D1320;
+
+  /* Bordes ultra finos en gris-azulado */
+  --border:    #161E2E;
+  --border-2:  #1F2A3D;
+
+  /* Acento único — oro sobrio, usado con moderación */
+  --accent:    #C9A55C;
+
+  /* Texto */
+  --text:      #ECEEF1;
+  --text-mid:  #9AA3B2;
+  --text-soft: #5B6577;
+
+  /* Tipografía corporativa — una sola familia */
+  --font-sans: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+
+  /* Layout */
+  --sidebar-w: 292px;
 }
 ```
 
-Cambiar `--blue` actualiza la barra de navegación, los dots del timeline,  
-los skill bars, los tech tags y el breadcrumb — todo a la vez.
+Cambiar `--accent` actualiza el CTA de descarga, los chips destacados, los badges de certificación, el borde activo de navegación y los enlaces de credencial — todo a la vez.
 
 ---
 
@@ -123,11 +147,11 @@ python3 -m http.server 3000
 
 ```css
 /* Cambiar color de acento → styles.css */
-:root { --blue: #8B5CF6; }  /* ejemplo: morado */
+:root { --accent: #7C6CD4; }  /* ejemplo: violeta corporativo */
 ```
 
 ```js
-/* Usar avatar Ghibli en lugar de foto → app.js */
+/* Activar avatar Ghibli generado por IA → app.js */
 const CONFIG = {
   avatar: { useRealPhoto: false }   /* ← cambiar a false */
 };
@@ -135,7 +159,11 @@ const CONFIG = {
 
 ```html
 <!-- Agregar nueva sección → index.html -->
-<section id="projects" class="reveal" aria-label="Proyectos">
+<section id="nueva-seccion" class="reveal" aria-label="Nueva sección">
+  <div class="section-heading">
+    <h2 class="section-title">Título</h2>
+    <div class="section-line"></div>
+  </div>
   ...
 </section>
 ```
@@ -143,9 +171,19 @@ const CONFIG = {
 ```js
 /* Registrar la sección en el breadcrumb → app.js */
 sectionLabels: {
-  projects: 'proyectos',   /* ← agregar aquí */
+  'nueva-seccion': 'Título',   /* ← agregar aquí */
 }
 ```
+
+---
+
+## 🎓 Certificaciones
+
+| Certificación | Emisor | Vigencia | Verificar |
+|---|---|---|---|
+| AWS Certified Cloud Practitioner | Amazon Web Services | Jun 2026 – Jun 2029 | [Credly](https://www.credly.com/badges/b1971ad4-9858-4399-a0ba-e08363200843/public_url) |
+| Fortinet Certified Associate in Cybersecurity | Fortinet | Nov 2025 – Nov 2027 | [Credly](https://www.credly.com/badges/0c5bdce4-554a-4d72-a9d1-5c273b40cd03/public_url) |
+| Google Cybersecurity Certificate | Google / Coursera | 2024 | [Coursera](https://www.coursera.org/account/accomplishments/professional-cert/certificate/HHWF9PVUNRTC) |
 
 ---
 
@@ -157,9 +195,9 @@ sectionLabels: {
 Ingeniero en Desarrollo y Gestión de Software  
 📍 Mérida, Yucatán · México
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-connect-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-alfredo--pablo--garcia-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://linkedin.com/in/alfredo-pablo-garcia-494075293)
 [![GitHub](https://img.shields.io/badge/GitHub-alfredo89953-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/alfredo89953)
-[![Email](https://img.shields.io/badge/Email-contacto-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:tu@email.com)
+[![Credly](https://img.shields.io/badge/Credly-certificaciones-FF6B35?style=flat-square&logo=credly&logoColor=white)](https://www.credly.com/badges/b1971ad4-9858-4399-a0ba-e08363200843/public_url)
 
 </div>
 
@@ -168,6 +206,6 @@ Ingeniero en Desarrollo y Gestión de Software
 <div align="center">
 
 Hecho con 🖤 en Mérida, Yucatán  
-`build v3.0.0` · `last_commit: 2025-11-01`
+`build v4.0.0` · `last_commit: 2026-06-28`
 
 </div>
