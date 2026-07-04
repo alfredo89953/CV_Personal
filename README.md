@@ -16,7 +16,7 @@
 
 <br/>
 
-[🌐 Ver en vivo](https://alfredo89953.github.io/CV_Personal) · [📄 Descargar PDF](assets/Alfredo-Pablo-Garcia-CV.pdf) · [📬 Contacto](#-contacto)
+[🌐 Ver en vivo](https://cvalfredo.vercel.app/) · [📄 Descargar PDF](https://cvalfredo.vercel.app/assets/Alfredo-Pablo-Garcia-CV.pdf) · [📬 Contacto](#-contacto)
 
 </div>
 
