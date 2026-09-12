@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-4.0.0-C9A55C?style=flat-square)
+![Version](https://img.shields.io/badge/version-4.1.0-C9A55C?style=flat-square)
 ![Status](https://img.shields.io/badge/status-active-4D8C6F?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-5B6577?style=flat-square)
 ![HTML](https://img.shields.io/badge/HTML5-semantic_ATS-E34F26?style=flat-square&logo=html5&logoColor=white)
@@ -184,6 +184,8 @@ sectionLabels: {
 | AWS Certified Cloud Practitioner | Amazon Web Services | Jun 2026 – Jun 2029 | [Credly](https://www.credly.com/badges/b1971ad4-9858-4399-a0ba-e08363200843/public_url) |
 | Fortinet Certified Associate in Cybersecurity | Fortinet | Nov 2025 – Nov 2027 | [Credly](https://www.credly.com/badges/0c5bdce4-554a-4d72-a9d1-5c273b40cd03/public_url) |
 | Google Cybersecurity Certificate | Google / Coursera | 2024 | [Coursera](https://www.coursera.org/account/accomplishments/professional-cert/certificate/HHWF9PVUNRTC) |
+| Junior Cybersecurity Analyst Career Path | Cisco Networking Academy | Completada | [Credly](https://www.credly.com/badges/33e38672-930f-49fe-8e6e-1bc73e0b7711/public_url) |
+| TrendAI Vision One™ Platform Practitioner | Trend Micro | Ago 2026 – Ago 2028 | Certificado PDF (físico, sin enlace público) |
 
 ---
 
@@ -206,6 +208,6 @@ Ingeniero en Desarrollo y Gestión de Software
 <div align="center">
 
 Hecho con 🖤 en Mérida, Yucatán  
-`build v4.0.0` · `last_commit: 2026-06-28`
+`build v4.1.0` · `last_commit: 2026-09-12`
 
 </div>

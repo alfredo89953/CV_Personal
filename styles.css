@@ -1006,6 +1006,13 @@ img { max-width: 100%; }
   margin-top: -1px;
 }
 
+.cert-link--static {
+  color: var(--text-soft);
+  cursor: default;
+  font-weight: 500;
+  font-style: italic;
+}
+
 
 /* ── 8f. Education card ── */
 .edu-card {
